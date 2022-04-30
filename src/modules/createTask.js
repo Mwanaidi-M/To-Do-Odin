@@ -1,7 +1,7 @@
 
 class todoTasks
 {
-    constructor(title, description, dueDate, priority = ['Low', 'Medium', 'High'], notes, project)
+    constructor(title, description, dueDate, priority, notes, project)
     {
         this.taskTitle = title;
         this.taskDescription = description;

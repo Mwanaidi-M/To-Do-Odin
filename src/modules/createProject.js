@@ -1,3 +1,5 @@
+const todoFull = [];
+
 class projectNew
 {
     constructor(projectName, projectTasks = [])
@@ -5,6 +7,7 @@ class projectNew
         this.projectName = projectName;
         this.projectTasks = projectTasks;
     }
+
 }
 
 // let projectFactory = (projectName, projectTasks = []) => {
@@ -12,4 +15,4 @@ class projectNew
 //     return {projectName, projectTasks};
 // }
 
-export { projectNew };
+export { todoFull, projectNew };

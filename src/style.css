@@ -36,6 +36,12 @@ section
 {
     background-color: rgb(225, 241, 132);
     flex: 3;
+
+    border: 1px solid rgb(70, 69, 69);
+}
+.listTasks
+{
+    background-color: cornsilk;
 }
 footer
 {

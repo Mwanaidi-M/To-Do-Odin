@@ -1,16 +1,17 @@
-import { projectNew } from './createProject';
+import { todoFull, projectNew } from './createProject';
 
-const getProjectInput = document.getElementById('proName');
 const getProjectForm = document.getElementById('addProject'); 
+const getProjectInput = document.getElementById('proName');
 const cancelProject = document.getElementById('cancelNewProject'); 
 const projectParent = document.getElementById('projects');
 const projectContainer = document.getElementById('projectList');
 
 
-const todoFull = [];
 const defaultProject = new projectNew('Inbox');
+const defaultProject2 = new projectNew('Home');
 
 todoFull.push(defaultProject);
+todoFull.push(defaultProject2);
 
 let userProject;
 
@@ -47,6 +48,7 @@ function addProject()
     todoFull.push(userProject);
 
     displayProject();
+
 }
 
 displayProject();
