@@ -24,7 +24,8 @@ getTaskForm.addEventListener('submit', (e) => {
 
 function prefilledValues()
 {
-    
+    let todoFull = JSON.parse(localStorage.getItem('todos')) || [];
+
     prioTask.innerHTML = '';
     projTask.innerHTML = '';
 
@@ -45,7 +46,9 @@ function prefilledValues()
 
         prioTask.appendChild(priOptions);
             
-    })
+    });
+
+    localStorage.setItem('todos', JSON.stringify(todoFull));
 }
 function displayTask()
 {

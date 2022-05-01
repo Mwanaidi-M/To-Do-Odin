@@ -6,13 +6,6 @@ const cancelProject = document.getElementById('cancelNewProject');
 const projectParent = document.getElementById('projects');
 const projectContainer = document.getElementById('projectList');
 
-
-const defaultProject = new projectNew('Inbox');
-const defaultProject2 = new projectNew('Home');
-
-todoFull.push(defaultProject);
-todoFull.push(defaultProject2);
-
 let userProject;
 
 getProjectForm.addEventListener('submit', (e) => {
@@ -25,6 +18,8 @@ getProjectForm.addEventListener('submit', (e) => {
 
 function displayProject()
 {
+    let todoFull = JSON.parse(localStorage.getItem('todos')) || [];
+    
     projectContainer.innerHTML = '';
 
     todoFull.forEach((item, index) => {
@@ -37,16 +32,21 @@ function displayProject()
     })
     projectParent.append(projectContainer);
 
+    localStorage.setItem('todos', JSON.stringify(todoFull));
+
     console.table(todoFull);
 }
 
 function addProject()
 {
     let nameProject = getProjectInput.value;
+    const todoFull = JSON.parse(localStorage.getItem('todos'));
 
     userProject = new projectNew(nameProject);
     todoFull.push(userProject);
 
+    localStorage.setItem('todos', JSON.stringify(todoFull));
+    // render them to screen
     displayProject();
 
 }
