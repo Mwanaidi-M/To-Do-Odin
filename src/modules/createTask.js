@@ -13,7 +13,6 @@ class todoTasks
 
 }
 
-
 // let taskTodo = (title, description, dueDate, priority, notes, project) =>
 // {
 //     return {

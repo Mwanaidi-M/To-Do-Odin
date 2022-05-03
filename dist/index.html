@@ -21,11 +21,6 @@
                 
             </ul>
             <h2 id="projects">Projects</h2>
-            <ul id="projectList">
-                
-            </ul>
-        </aside>
-        <section>
             <div class="addProjectContainer">
                 <form action="" id="addProject">
                     <div class="formInput">
@@ -38,6 +33,35 @@
                     </div>
                 </form>
             </div>
+            <div class="editProjectContainer">
+                <form action="" id="editProject">
+                    <div class="formInput">
+                        <label for="editProName">Project Name <span>&ast;</span></label>
+                        <input type="text" name="editProName" id="editProName" minlength="4" required>
+                    </div>
+                    <div class="formButt">
+                        <button type="button" id="editProjectBtn">Edit</button>
+                        <button type="button" id="cancelEditProject">Cancel</button>
+                    </div>
+                </form>
+            </div>
+            <ul id="projectList">
+                
+            </ul>
+        </aside>
+        <section>
+            <!-- <div class="addProjectContainer">
+                <form action="" id="addProject">
+                    <div class="formInput">
+                        <label for="proName">Project Name <span>&ast;</span></label>
+                        <input type="text" name="proName" id="proName" minlength="4" required>
+                    </div>
+                    <div class="formButt">
+                        <button type="submit" id="newProject">Add</button>
+                        <button type="button" id="cancelNewProject">Cancel</button>
+                    </div>
+                </form>
+            </div> -->
         </section>
         <section>
             <div class="addTaskContainer">
@@ -57,7 +81,9 @@
                     <div class="formInput">
                         <label for="taskPrio">Priority</label>
                         <select name="taskPrio" id="taskPrio">
-
+                            <option value="Low">Low</option>
+                            <option value="Medium">Medium</option>
+                            <option value="High">High</option>
                         </select>
                     </div>
                     <div class="formInput">
@@ -71,8 +97,44 @@
                         </select>
                     </div>
                     <div class="formButt">
-                        <button type="submit" id="newProject">Add</button>
-                        <button type="button" id="cancelNewProject">Cancel</button>
+                        <button type="submit" id="newTask">Add</button>
+                        <button type="button" id="cancelNewTask">Cancel</button>
+                    </div>
+                </form>
+            </div>
+            <div class="editTaskContainer">
+                <form action="" id="editTask">
+                    <div class="formInput">
+                        <label for="editTaskTitle">Title</label>
+                        <input type="text" id="editTaskTitle" name="editTaskTitle" minlength="4" required>
+                    </div>
+                    <div class="formInput">
+                        <label for="editTaskDesc">Description</label>
+                        <textarea name="editTaskDesc" id="editTaskDesc" cols="30" rows="10"></textarea>
+                    </div>
+                    <div class="formInput">
+                        <label for="editTaskDue">Due Date</label>
+                        <input type="date" id="editTaskDue" name="editTaskDue" required>
+                    </div>
+                    <div class="formInput">
+                        <label for="editTaskPrio">Priority</label>
+                        <select name="editTaskPrio" id="editTaskPrio">
+                            <option value="Low">Low</option>
+                            <option value="Medium">Medium</option>
+                            <option value="High">High</option>
+                        </select>
+                    </div>
+                    <div class="formInput">
+                        <label for="editTaskNotes">Notes</label>
+                        <textarea name="editTaskNotes" id="editTaskNotes" cols="30" rows="10"></textarea>
+                    </div>
+                    <div class="formInput">
+                        <label for="editTaskProject">Project</label>
+                        <input type="text" name="editTaskProject" id="editTaskProject" disabled>
+                    </div>
+                    <div class="formButt">
+                        <button type="button" id="editTaskBtn">Edit</button>
+                        <button type="button" id="cancelNewTaskBtn">Cancel</button>
                     </div>
                 </form>
             </div>

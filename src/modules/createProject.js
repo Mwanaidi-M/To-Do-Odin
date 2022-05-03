@@ -9,19 +9,29 @@ class projectNew
         this.projectTasks = projectTasks;
     }
 
+    capProjectName()
+    {
+        let nameP = this.projectName;
+        nameP = nameP.split('').map((lett, index)=>{
+            return index === 0 ? lett.toUpperCase(): lett;
+        }).join('');
+
+        this.projectName = nameP; 
+        
+        return this.projectName  ;
+    }
 }
 
-// localStorage.setItem('AllTodo', JSON.stringify(todoFull));
 
 // let projectFactory = (projectName, projectTasks = []) => {
     
 //     return {projectName, projectTasks};
 // }
-const defaultProject = new projectNew('Inbox');
-const defaultProject2 = new projectNew('Home');
+// const defaultProject = new projectNew('Inbox');
+// const defaultProject2 = new projectNew('Home');
 
-todoFull.push(defaultProject);
-todoFull.push(defaultProject2);
+// todoFull.push(defaultProject);
+// todoFull.push(defaultProject2);
 
 // localStorage.setItem('todos', JSON.stringify(todoFull));
 // localStorage.clear();
