@@ -1,6 +1,13 @@
-
+import { format} from 'date-fns'
 import { todoFull, projectNew } from './createProject';
 import { todoTasks } from './createTask';
+
+// task DOM elements
+const trigger = document.querySelector('#task-modal-trigger');
+const modal = document.querySelector('.task-modal');
+const editModal = document.querySelector('.edit-task-modal');
+const closeButton = document.querySelector('.close-btn');
+const closeEdit = document.querySelector('.close-edit');
 
 const getTaskFormCont = document.querySelector('.addTaskContainer');
 const getTaskForm = document.getElementById('addTask');
@@ -10,10 +17,12 @@ const dueTask = document.getElementById('taskDue');
 const prioTask = document.getElementById('taskPrio');
 const notesTask = document.getElementById('taskNotes');
 const projTask = document.getElementById('taskProject');
+const cancelNewTask = document.getElementById('cancelNewTask');
 const taskContainer = document.getElementById('showTasks');
 
 
 const editTaskFormCont = document.querySelector('.editTaskContainer');
+const getEditForm = document.getElementById('editTask');
 const editTaskBtn = document.getElementById('editTaskBtn');
 const editTitle = document.getElementById('editTaskTitle');
 const editDesc = document.getElementById('editTaskDesc');
@@ -22,23 +31,80 @@ const editPrio = document.getElementById('editTaskPrio');
 const editNotes = document.getElementById('editTaskNotes');
 const getTaskProject = document.getElementById('editTaskProject');
 
+
+const displayAllTodos = document.getElementById('all');
+const displayInbox = document.getElementById('inb');
+const heading = document.getElementById('project-title');
+const msg = document.getElementById('p-msg');
+
+
 let userTask;
-let priorityOptions = ['Low', 'Medium', 'High'];
+
+const todayDate = Date.now();
+let formatToday = format(todayDate, 'YYY-MM-dd');
+
+dueTask.setAttribute('min', formatToday);
+editDueDate.setAttribute('min', formatToday);
+
+const defaultProject = new projectNew('inbox');
+
+function showModal()
+{
+    modal.classList.toggle('show-modal');
+}
+
+function showEditModal()
+{
+    editModal.classList.toggle('show-modal');
+}
+
+function windowOnClick(e)
+{
+    if(e.target === modal)
+    {
+        showModal();
+    }
+    else if(e.target === editModal)
+    {
+        showEditModal();
+    }
+}
+
+trigger.addEventListener('click', (e) => {
+
+    prefilledValues();
+
+    showModal();
+});
 
 getTaskForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
     addTask();
 
+    showModal();
+
     getTaskForm.reset();
 })
 
+getEditForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    let taskIndex = e.target.getAttribute('toUpdate');
+
+    editTaskTodo(taskIndex);
+
+    showEditModal();
+});
+
 function prefilledValues()
 {
-    let todoFull = JSON.parse(localStorage.getItem('todos')) || [];
+    // displayProject();
+    // let todoFull = JSON.parse(localStorage.getItem('todos')) || [defaultProject];
+
+    let todoFull = JSON.parse(localStorage.getItem('todos'));
 
     projTask.innerHTML = '';
-
 
     todoFull.forEach((project, index) => {
         const projOptions = document.createElement('option');
@@ -50,12 +116,36 @@ function prefilledValues()
 
     localStorage.setItem('todos', JSON.stringify(todoFull));
 }
+
+function prefilledEditValues()
+{
+    // displayProject();
+    // let todoFull = JSON.parse(localStorage.getItem('todos')) || [defaultProject];
+
+    let todoFull = JSON.parse(localStorage.getItem('todos'));
+
+    getTaskProject.innerHTML = '';
+
+    todoFull.forEach((project, index) => {
+        const projOptions = document.createElement('option');
+        projOptions.innerHTML = project['projectName'];
+        projOptions.value = project['projectName'];
+
+        getTaskProject.appendChild(projOptions);
+    });
+
+    // console.table(todoFull);
+    localStorage.setItem('todos', JSON.stringify(todoFull));
+}
+
+
 function displayTask()
 {
-    let todoFull = JSON.parse(localStorage.getItem('todos')) || [];
+    let todoFull = JSON.parse(localStorage.getItem('todos')) || [defaultProject];
     taskContainer.innerHTML = '';
 
     todoFull.forEach((project, index) => {
+
         // const taskRow = document.createElement('tr');
         // taskRow.innerHTML = '';
         project.projectTasks.forEach((task, index) => {
@@ -73,8 +163,12 @@ function displayTask()
             const editButton = document.createElement('button');
             editButton.innerText = 'update';
             editButton.addEventListener('click', (e) => {
-                getTaskFormCont.style.display = 'none';
-                editTaskFormCont.style.display = 'block';
+
+                showEditModal();
+
+                prefilledEditValues();
+                // getTaskFormCont.style.display = 'none';
+                // editTaskFormCont.style.display = 'block';
 
                 editTitle.value = task.taskTitle;
                 editDesc.value = task.taskDescription;
@@ -83,7 +177,8 @@ function displayTask()
                 editNotes.value = task.taskNotes;
                 getTaskProject.value = task.taskProject;
 
-                editTaskBtn.setAttribute('toUpdate', index);
+                // editTaskBtn.setAttribute('toUpdate', index);
+                getEditForm.setAttribute('toUpdate', index);
 
             })
             // readButton.classList.add('readBtn');
@@ -100,7 +195,7 @@ function displayTask()
 
                 displayTask();
 
-                console.table(project.projectTasks);
+                console.table(todoFull);
             })
             // deleteButton.classList.add('deleteBtn');
             removeTask.appendChild(deleteButton);
@@ -112,6 +207,8 @@ function displayTask()
 
     localStorage.setItem('todos', JSON.stringify(todoFull));
 }
+
+
 function addTask()
 {
     let todoFull = JSON.parse(localStorage.getItem('todos'));
@@ -136,13 +233,14 @@ function addTask()
     displayTask();
 }
 
-function editTaskTodo(e)
+function editTaskTodo(taskIndex)
 {
     let todoFull = JSON.parse(localStorage.getItem('todos'));
-    let taskIndex = e.target.getAttribute('toUpdate');
+    // let taskIndex = e.target.getAttribute('toUpdate');
     let tProj = getTaskProject.value;
     let projectIndex = todoFull.findIndex((pro) => pro.projectName === tProj);
 
+    // console.table(todoFull);
     const title = editTitle.value;
     const desc = editDesc.value;
     const tDate = editDueDate.value;
@@ -156,17 +254,20 @@ function editTaskTodo(e)
     todoFull[projectIndex]['projectTasks'][taskIndex]['taskNotes'] = tNotes;
 
     localStorage.setItem('todos', JSON.stringify(todoFull));
-
+    
     displayTask();
 
-    getTaskFormCont.style.display = 'block';
-    editTaskFormCont.style.display = 'none';
     // console.log(taskIndex);
 
-    // console.log(todoFull[projectIndex]['projectTasks'][taskIndex]);
 }
 
-prefilledValues();
-displayTask();
+// displayTask();
 
-editTaskBtn.addEventListener('click', editTaskTodo);
+// editTaskBtn.addEventListener('click', editTaskTodo);
+
+window.addEventListener('click', windowOnClick);
+closeButton.addEventListener('click', showModal);
+closeEdit.addEventListener('click', showEditModal);
+cancelNewTask.addEventListener('click', showModal);
+
+export {displayTask};

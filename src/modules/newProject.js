@@ -1,34 +1,75 @@
 import { todoFull, projectNew } from './createProject';
+import { displayTask } from './newTask';
 
+// Modal DOM Elements
+const modal = document.querySelector('.modal');
+const editModal = document.querySelector('.edit-modal');
+const trigger = document.querySelector('.projects-trigger');
+const closeButton = document.querySelector('.close-modal-btn');
+const closeEditButton = document.querySelector('.close-edit-btn');
+
+// Project Creation DOM Elements
 const getProjectForm = document.getElementById('addProject');
 const getProjectInput = document.getElementById('proName');
 const cancelProject = document.getElementById('cancelNewProject'); 
 const projectParent = document.getElementById('projects');
 const projectContainer = document.getElementById('projectList');
+const errorMessage = document.getElementById('err-msg');
 
+// Project Edit DOM Elements
 const editFormCont = document.querySelector('.editProjectContainer');
+const getEditForm = document.getElementById('editProject');
 const editFormBtn = document.getElementById('editProjectBtn');
 const cancelEditFormBtn = document.getElementById('cancelEditProject');
 const editProjectInput = document.getElementById('editProName'); 
 
-// editFormCont.style.display = 'none';
+const defaultProject = new projectNew('Inbox');
+const defaultProject2 = new projectNew('Home');
 
 let userProject;
 
-const defaultProject = new projectNew('Inbox');
-const defaultProject2 = new projectNew('Home');
+
+function toggleModal()
+{
+    modal.classList.toggle('show-modal');
+}
+
+function toggleEditModal()
+{
+    editModal.classList.toggle('show-modal');
+}
+
+
+function windowOnClick(e)
+{
+    if(e.target === modal)
+    {
+        toggleModal();
+    }
+    else if(e.target === editModal)
+    {
+
+
+        toggleEditModal();
+    }
+}
 
 getProjectForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    addProject();
+    validateEntry();
 
     getProjectForm.reset();
-})
-
-// [defaultProject, defaultProject2]
+});
 
 
+getEditForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+   
+    let pIndex = e.target.getAttribute('toUpdate');
+
+    renameProject(pIndex);
+});
 
 function displayProject()
 {
@@ -46,12 +87,16 @@ function displayProject()
         {
             const renameButt = document.createElement('button');
             renameButt.innerHTML = 'Rename';
+
             renameButt.addEventListener('click', (e) => {
-                editFormCont.style.display = 'block';
+                e.preventDefault();
+
+                toggleEditModal();
 
                 editProjectInput.value = item.projectName;
 
-                editFormBtn.setAttribute('toUpdate', index);
+                // editFormBtn.setAttribute('toUpdate', index);
+                getEditForm.setAttribute('toUpdate', index);
             })
 
             listElement.appendChild(renameButt);
@@ -60,10 +105,11 @@ function displayProject()
             deleteButt.innerHTML = 'Delete';
             deleteButt.addEventListener('click', (e) => {
                 todoFull.splice(index, 1);
-                
+
                 localStorage.setItem('todos', JSON.stringify(todoFull));
 
                 displayProject();
+                displayTask();
             });
 
             listElement.appendChild(deleteButt);
@@ -78,48 +124,81 @@ function displayProject()
     console.table(todoFull);
 }
 
-
-
-function addProject()
+function validateEntry()
 {
     let nameProject = getProjectInput.value;
 
     let todoFull = JSON.parse(localStorage.getItem('todos'));
 
-    userProject = new projectNew(nameProject);
+    // check if the Project Name already exists
+    let ans = todoFull.some(todo => todo.projectName === nameProject);
 
-    userProject.capProjectName();
+    if(ans === true)
+    {
+        errorMessage.innerHTML = 'This project name already exists.';
+    }
+    else
+    {
+        errorMessage.innerHTML = '';
+        addProject();
+    }
+}
+
+function addProject()
+{
+    let todoFull = JSON.parse(localStorage.getItem('todos'));
+
+    let nameProject = getProjectInput.value;
+    
+    userProject = new projectNew(nameProject);
+    // userProject.capProjectName();
 
     todoFull.push(userProject);
 
     localStorage.setItem('todos', JSON.stringify(todoFull));
     // render them to screen
-    displayProject();
 
+    displayProject();
+    
+    toggleModal();
 }
 
 
-function renameProject(e)
+function renameProject(pIndex)
 {
     let todoFull = JSON.parse(localStorage.getItem('todos'));
-    let pIndex = e.target.getAttribute('toUpdate');
+    
     let newName = editProjectInput.value;
 
     todoFull[pIndex]['projectName'] = newName;
+    
+    if(todoFull[pIndex]['projectTasks'].length >= 1)
+    {
+        todoFull[pIndex]['projectTasks'].forEach(task => {
+            task.taskProject = newName;
+        });
+    }
 
     localStorage.setItem('todos', JSON.stringify(todoFull));
 
     displayProject();
 
-    editFormCont.style.display = 'none';
+    displayTask();
+
+    toggleEditModal();
 }
 
-function cancelEditProject()
-{
-    editFormCont.style.display = 'none';
-}
+
+trigger.addEventListener('click', toggleModal);
+closeButton.addEventListener('click', toggleModal);
+cancelProject.addEventListener('click', toggleModal);
+
+closeEditButton.addEventListener('click', toggleEditModal);
+cancelEditFormBtn.addEventListener('click', toggleEditModal);
+
+window.addEventListener('click', windowOnClick);
 
 displayProject();
+// displayTask();
+// editFormBtn.addEventListener('click', renameProject);
 
-editFormBtn.addEventListener('click', renameProject);
-cancelEditFormBtn.addEventListener('click', cancelEditProject);
