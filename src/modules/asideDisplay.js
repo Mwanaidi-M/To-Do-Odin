@@ -1,10 +1,12 @@
+// ASIDE DISPLAY MODULE
+
 import { format, parseISO, addDays, differenceInDays } from 'date-fns'
 
 import { createProject } from "./createProject";
 import { createTask } from "./createTask";
 import { displayProject } from './todosDisplay';
 
-const getViewOptions = document.querySelectorAll('.view-options>li');
+const getViewOptions = document.querySelectorAll('.view-options>div');
 const displayAllTodos = document.getElementById('all');
 const displayInbox = document.getElementById('inb');
 const heading = document.getElementById('project-title');
@@ -13,24 +15,11 @@ const msg = document.getElementById('p-msg');
 // task display container
 const taskContainer = document.getElementById('taskShow');
 
-let displayDOM = (() => {
-    function autoDisplay(pIndex=null)
-    {
-        if(pIndex===null)
-        {
-            createProject.todoFull.forEach(project => {
-                project.projectTasks.forEach(task => {
-                    console.log(task);
-                })
-            })
-        }
-        else
-        {
-            createProject.todoFull[pIndex].projectTasks.forEach(task => {
-                console.log(task);
-            })
-        }
-    }
+let displayAside = (() => {
+
+    /** function to enable user click on elements on the aside area and view any related tasks
+     *  for the clicked item in that area.
+     */
     function render()
     {      
         let today = Date.now();
@@ -111,4 +100,4 @@ let displayDOM = (() => {
     }
 })();
 
-export {displayDOM}
+export {displayAside}

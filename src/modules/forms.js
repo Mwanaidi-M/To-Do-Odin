@@ -1,9 +1,11 @@
+// Module to handle display of form modals for the project and tasks
+
 import { format} from 'date-fns';
 
 import { createProject } from "./createProject";
 import { createTask } from "./createTask";
 import { displayProject } from "./todosDisplay";
-import { displayDOM } from "./displayDom";
+import { displayAside } from "./asideDisplay";
 
 let formsDisplay = (() => {
 
@@ -37,7 +39,6 @@ let formsDisplay = (() => {
     const closeTaskButton = document.querySelector('.close-btn');
     const closeEdit = document.querySelector('.close-edit');
 
-    // const testBtn = document.getElementById('edit-trigger');
 
     // Task Creation DOM Elements
     const getTaskFormCont = document.querySelector('.addTaskContainer');
@@ -99,9 +100,9 @@ let formsDisplay = (() => {
     }
 
 
+    // function to close the modal when a user clicks anywhere on the window
     function windowOnClick(e)
     {
-
         if(e.target == modal)
         {
             toggleCreateProjectModal();
@@ -122,6 +123,11 @@ let formsDisplay = (() => {
         
     }
 
+    /** function to check the projectName a user inputs;
+     * if the projectName exists already, a msg is displayed so that user can enter a different name;
+     * if the name does not exist, call the project creation function;
+     * call the project and list display functions for the frontend
+     */
     function validateProjectEntry(pName)
     {
 
@@ -140,12 +146,13 @@ let formsDisplay = (() => {
             displayProject.listProject();
 
             displayProject.listTasks();
-
-            // displayProject.renderSpecificProjectContent();
         }
     }
 
 
+    /** given that projectNames need to be prefilled, add the names as option tags under the select
+     * for the forms, that way user can select a project from the list provided.
+      */
     function prefillProjectNames(sTag)
     {
         sTag.innerHTML = '';
@@ -161,6 +168,10 @@ let formsDisplay = (() => {
     }
 
 
+    /** when user submits the project form, get projectName from input value;
+     * validate the input;
+     * reset the form to clear the previous input.
+     */
     getProjectForm.addEventListener('submit', (e) => {
         e.preventDefault();
 
@@ -172,6 +183,11 @@ let formsDisplay = (() => {
     })
 
 
+    /** when user submits the task form, gather the input values;
+     * call the add task function;
+     * reset the form;
+     * call the toggle modal function to close the modal after submit
+     */
     getTaskForm.addEventListener('submit', (e) => {
 
         e.preventDefault();
@@ -204,6 +220,7 @@ let formsDisplay = (() => {
     
 
     // Create Task  modal
+    // when the task modal trigger is called, call the function to prefill the projectNames then show the modal.
     taskTrigger.addEventListener('click', (e) => {
         prefillProjectNames(projTask);
 
@@ -212,13 +229,7 @@ let formsDisplay = (() => {
     closeTaskButton.addEventListener('click', toggleCreateTaskModal);
     cancelNewTask.addEventListener('click', toggleCreateTaskModal);
 
-    // editTaskModal.addEventListener('click', (e) => {
-
-    //     prefillProjectNames(getTaskProject);
-
-    //     // toggleEditTaskModal();
-    // });
-
+    // Edit task modal
     closeEdit.addEventListener('click', toggleEditTaskModal);
     cancelEditTask.addEventListener('click', toggleEditTaskModal);
 

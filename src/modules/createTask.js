@@ -1,3 +1,5 @@
+// CLASS MODULE:
+
 import {createProject} from './createProject';
 
 // class todoTasks
@@ -18,6 +20,7 @@ import {createProject} from './createProject';
 
 let createTask = (() => {
 
+    /** created class for the task and its properties. */
     class newTask
     {
         constructor(title, dueDate, priority, notes, project)
@@ -30,6 +33,11 @@ let createTask = (() => {
         }
     }
 
+    /** function to create a new task that takes the properties as params;
+     * create a new task object given the params;
+     * push the object to the projectTasks array;
+     * update the localStorage item.
+     */
     function addTask(title, dueDate, project, priority, notes)
     {
         let projectIndex = createProject.todoFull.findIndex(pr => pr.projectName === project);
@@ -44,6 +52,10 @@ let createTask = (() => {
         console.table(createProject.todoFull);
     }
 
+    /** function to edit the task that takes the properties a params and the task index;
+     * update the values with the new values given;
+     * update the localStorage item.
+     */
     function editTask(taskIndex, title, dueDate, priority, notes, project)
     {
         let projectIndex = createProject.todoFull.findIndex(pr => pr.projectName === project);
@@ -58,6 +70,10 @@ let createTask = (() => {
         console.table(createProject.todoFull[projectIndex]['projectTasks']);
     }
 
+    /** function to delete the task given the projectIndex and taskIndex as params;
+     * remove the respective task from the array;
+     * update the localStorage item.
+     */
     function deleteTask(projectIndex, taskIndex)
     {
         createProject.todoFull[projectIndex]['projectTasks'].splice(taskIndex, 1);
@@ -67,6 +83,9 @@ let createTask = (() => {
         console.table(createProject.todoFull);
     }
 
+     /**for the IIFE, return the functions as objects to be used in other modules;
+     * export the IIFE.
+     */
     return {
         addTask,
         editTask,

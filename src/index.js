@@ -1,7 +1,4 @@
-import {createProject} from './modules/createProject';
-import {createTask} from './modules/createTask';
-import {displayDOM} from './modules/displayDom';
-import {formsDisplay} from './modules/forms';
+import {displayAside} from './modules/asideDisplay';
 import { displayProject } from './modules/todosDisplay';
 
 // require('./modules/newProject');
@@ -19,10 +16,9 @@ function projectDefault()
 }
 
 displayProject.listProject();
-// displayProject.renderSpecificProjectContent();
 displayProject.listTasks();
 
-displayDOM.render();
+displayAside.render();
 
 // createProject.editProjectName(1,'haa');
 // createTask.editTask(1,'gym', '2022-05-06','high','go work out', 'home');

@@ -15,10 +15,16 @@ body
     display: flex;
     flex-direction: column;
 }
+
 header
 {
-    background-color: rgb(136, 242, 207);
-    min-height: 8vh;
+    background-color: #0891b2;
+    min-height: 6vh;
+    color: #ecfeff;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 main
 {
@@ -26,42 +32,226 @@ main
     flex: 1;
 
     display: flex;
-
+    flex-wrap: wrap;
+    min-height: 100%;
 }
 aside
 {
-    background-color: rgb(140, 93, 93);
+    background-color: #f4f4f5;
+    color: #3f3f46;
     flex: 1;
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
-.view-options li
+aside > div
+{
+    /* border: 2px solid red; */
+    padding: 10px 20px;
+}
+.view-options
+{
+    display: flex;
+    flex-direction: column;
+    
+    gap: 20px;
+}
+.view-options div
+{
+    cursor: pointer;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 5px;
+
+    font-size: 1.2rem;
+}
+
+
+.projects-aside
+{
+    display: flex;
+    flex-direction: column;
+    
+    gap: 20px;
+}
+
+.added-projects
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+}
+.added-projects div
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* border: 1px solid green; */
+
+    font-size: 1.2rem;
+}
+.todo-project
 {
     cursor: pointer;
 }
-li
+.todo-project::before
 {
+    content: '\2686';
+    color:#0369a1;
     font-size: 1.2rem;
-    font-weight: bold;
+    margin-right: 5px;
 }
+.project-edit-buttons
+{
+    width: 20%;
+    /* background-color: #292524; */
+    /* cursor: pointer; */
+}
+.project-edit-buttons > button
+{
+    all: unset;
+    cursor: pointer;
+    transition: transform .3s ease-in;
+}
+.project-edit-buttons > button:nth-child(1) svg:hover path
+{
+    fill:#0369a1;
+}
+
+.project-edit-buttons > button:nth-child(2) svg:hover
+{
+    transform: scale(1.1);
+}
+ 
 section
 {
-    background-color: rgb(225, 241, 132);
+    background-color: #f7f8fa;
     flex: 3;
+    /* border: 1px solid rgb(70, 69, 69); */
+}
 
-    border: 1px solid rgb(70, 69, 69);
+#task-modal-trigger
+{
+    cursor: pointer;
+    background-color: transparent;
+    min-width: 100%;
+    padding: 5px;
+    outline: none;
+    border: none;
+    font-size: 1.3rem;
+    transition: all .3s ease-in;
+}
+#task-modal-trigger:hover
+{
+  background-color: #cbd5e1;
 }
 .listTasks
 {
     background-color: cornsilk;
 }
+.tasks-display-area
+{
+    /* border: 2px solid red; */
+    width: 100%;
+    height: auto;
+    /* height: calc(100% - 4vh); */
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    font-size: 1.2rem;
+}
+article > div
+{
+    /* border: 1px solid rgb(22, 25, 17); */
+    margin-bottom: 20px;
+}
+summary
+{
+    cursor: pointer;
+    list-style: none;
+    padding: 10px;
+    border-bottom: 2px solid #0369a1;
+}
+summary > div
+{
+    width: 100%;
+    height: 100%;
+    display: inline-flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.title
+{
+    flex: 2;
+    /* background-color: #e3d7c6; */
+}
+.title span
+{
+    /* background-color: red; */
+    padding: 4px 6px;
+    border-radius: 16px;
+    margin-left: 10px;
+}
+.butts
+{
+    flex: 1;
+    /* background-color: #f8f7ee; */
+    
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-end;
+    gap: 5px;
+}
+
+summary > div::before {
+    content: '+';
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-weight: bolder;
+    margin-right: 10px;
+    display: inline-block;
+    transition: 0.2s;
+}
+
+details[open] summary > div::before {
+    transform: rotate(45deg);
+}
+.butts button
+{
+    all: unset;
+    cursor: pointer;
+    padding: 2px;
+    border-radius: 5px;
+    transition: all .2s ease-in;
+}
+.butts button:hover
+{
+    background-color: #d1d5db;
+}
+
 footer
 {
-    background-color: rgb(135, 195, 244);
+    background-color: #0891b2;
+    min-height: 4vh;
+    color: #ecfeff;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-/* .editProjectContainer,
-.editTaskContainer
+.git-logo svg:hover path
 {
-    display: none;
-} */
+    fill: #292524;
+}
+
 .project-header
 {
     display: flex;
@@ -142,7 +332,3 @@ footer
     color: brown;
 }
 
-.todo-project
-{
-    cursor: pointer;
-}

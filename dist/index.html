@@ -9,29 +9,55 @@
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> -->
 
     <title>To-Do Odin</title>
-
-    <!-- <script src="https://kit.fontawesome.com/8c1f26615f.js" crossorigin="anonymous"></script> -->
-
 </head>
 <body>
     <header>
-        <a href="./index.html">M~ToDo</a>
-
+        <p class="aside-burger">Toggle Aside</p>
+        <a href="./index.html" class="project-logo">M~ToDo~List</a>
     </header>
     <main>
         <aside>
             <div class="top-aside">
-                <ul class="view-options">
+                <div class="view-options">
+                    <div id="all">
+                        <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M0.41,13.41L6,19L7.41,17.58L1.83,12M22.24,5.58L11.66,16.17L7.5,12L6.07,13.41L11.66,19L23.66,7M18,7L16.59,5.58L10.24,11.93L11.66,13.34L18,7Z" />
+                        </svg>
+                        All ToDo's
+                    </div>
+                    <div id="inb">
+                        <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M19 3H5A2 2 0 0 0 3 5V19A2 2 0 0 0 5 21H19A2 2 0 0 0 21 19V5A2 2 0 0 0 19 3M5 19V17H8.13A4.13 4.13 0 0 0 9.4 19M19 19H14.6A4.13 4.13 0 0 0 15.87 17H19M19 15H14V16A2 2 0 0 1 10 16V15H5V5H19Z" />
+                        </svg>
+                        Inbox
+                    </div>
+                    <div id="today">
+                        <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M7,10H12V15H7M19,19H5V8H19M19,3H18V1H16V3H8V1H6V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3Z" />
+                        </svg>
+                        Today
+                    </div>
+                    <div id="next7">
+                        <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M19,19H5V8H19M16,1V3H8V1H6V3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3H18V1" />
+                        </svg>
+                        Next 7 Days
+                    </div>
+                </div>
+                <!-- <ul class="view-options">
                     <li id="all">All ToDo's</li>
                     <li id="inb">Inbox</li>
                     <li id="today">Today</li>
                     <li id="next7">Next 7 Days</li>
-                </ul>
+                </ul> -->
             </div>
             <div class="projects-aside">
                 <div class="project-header">
-                    <p id="projects">Projects</p>
-                    <button class="projects-trigger">Add Project</button>
+                    <h2 id="projects">Projects</h2>
+                    <svg style="width:24px;height:24px" viewBox="0 0 24 24" class="projects-trigger">
+                        <path fill="currentColor" d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
+                    </svg>
+                    <!-- <button class="projects-trigger">Add Project</button> -->
                     <!-- <i class="projects-trigger">&plus;</i> -->
                 </div>
                 <div class="addProjectContainer modal">
@@ -71,13 +97,18 @@
                         </form>
                     </div>
                 </div>
-                <ul id="projectList">
+                <div id="projectList" class="added-projects">
                 
-                </ul>
+                </div>
+                <!-- <ul id="projectList">
+                
+                </ul> -->
             </div>
         </aside>
         <section>
-            <button id="task-modal-trigger">Add Task</button>
+            <button id="task-modal-trigger">
+                + Add Task
+            </button>
             <!-- <button id="edit-trigger">Edit Task</button> -->
 
             <div class="addTaskContainer task-modal">
@@ -168,17 +199,17 @@
                 </div>
             </div>
             <hr>
-            <h3 id="project-title"></h3>
-            <p id="p-msg"></p>
-
-            <article id="taskShow">
-
-            </article>
-            <table class="listTasks">
+            <div class="tasks-display-area">
+                <h3 id="project-title"></h3>
+                <p id="p-msg"></p>
+                <article id="taskShow">
+                </article>
+            </div>
+            <!-- <table class="listTasks">
                 <tbody id="showTasks">
     
                 </tbody>
-            </table>
+            </table> -->
         </section>
         <!-- <section id="taskShow">
             
@@ -190,7 +221,11 @@
         </table> -->
     </main>
     <footer>
-        By M_
+        Dev by M_Idi <a href="https://github.com/Mwanaidi-M/To-Do-Odin" class="git-logo">
+            <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                <path fill="#ecfeff" d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z" />
+            </svg>
+        </a>
     </footer>
     <script src="main.js"></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script> -->
