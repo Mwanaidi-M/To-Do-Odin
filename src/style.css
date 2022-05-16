@@ -1,440 +1,383 @@
-:root
-{
-    --main-logo-heading: 'Macondo', cursive;
-    --aside-projects-font: 'Playfair Display', serif;
-    --other-headings-font: 'Ubuntu', sans-serif;
-    --text-font: 'Padauk', sans-serif;
+:root {
+  --main-logo-heading: "Macondo", cursive;
+  --aside-projects-font: "Playfair Display", serif;
+  --other-headings-font: "Ubuntu", sans-serif;
+  --text-font: "Padauk", sans-serif;
 }
 
-*
-{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-html
-{
-    scroll-behavior: smooth;
+html {
+  scroll-behavior: smooth;
 }
 
-body
-{
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-header
-{
-    background-color: #0891b2;
-    min-height: 6vh;
+header {
+  background-color: #0891b2;
+  min-height: 6vh;
 
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
-.project-logo
-{
-    text-decoration: none;
-    color: #fafbfc;
-    font-size: 2rem;
-    font-family: var(--main-logo-heading);
+.project-logo {
+  text-decoration: none;
+  color: #fafbfc;
+  font-size: 2rem;
+  font-family: var(--main-logo-heading);
 }
-main
-{
-    background-color: rgb(239, 232, 223);
-    flex: 1;
+main {
+  background-color: rgb(239, 232, 223);
+  flex: 1;
 
-    display: flex;
-    flex-wrap: wrap;
-    min-height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  min-height: 100%;
 }
-aside
-{
-    background-color: #f4f4f5;
-    color: #3f3f46;
-    flex: 1;
+aside {
+  background-color: #f4f4f5;
+  color: #3f3f46;
+  flex: 1;
 
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
-aside > div
-{
-    /* border: 2px solid red; */
-    padding: 10px 20px;
+aside > div {
+  /* border: 2px solid red; */
+  padding: 10px 20px;
 }
-.view-options
-{
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+.view-options {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 
-    font-family: var(--aside-projects-font);
-    font-size: 1.1rem;
+  font-family: var(--aside-projects-font);
+  font-size: 1.1rem;
 }
-.view-options div
-{
-    cursor: pointer;
+.view-options div {
+  cursor: pointer;
 
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 5px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 5px;
 
-    font-size: 1.2rem;
+  font-size: 1.2rem;
 }
 
-.projects-aside
-{
-    display: flex;
-    flex-direction: column;
-    
-    gap: 20px;
+.projects-aside {
+  display: flex;
+  flex-direction: column;
+
+  gap: 20px;
 }
 
+.added-projects {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
 
-.added-projects
-{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 20px;
+  font-family: var(--aside-projects-font);
+  font-size: 1.1rem;
+}
+.added-projects div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* border: 1px solid green; */
 
-    font-family: var(--aside-projects-font);
-    font-size: 1.1rem;
+  font-size: 1.2rem;
 }
-.added-projects div
-{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    /* border: 1px solid green; */
-
-    font-size: 1.2rem;
+.todo-project {
+  cursor: pointer;
 }
-.todo-project
-{
-    cursor: pointer;
+.todo-project::before {
+  content: "\2686";
+  color: #0369a1;
+  font-size: 1.2rem;
+  margin-right: 5px;
 }
-.todo-project::before
-{
-    content: '\2686';
-    color:#0369a1;
-    font-size: 1.2rem;
-    margin-right: 5px;
+.project-edit-buttons {
+  width: 20%;
+  /* background-color: #292524; */
+  /* cursor: pointer; */
 }
-.project-edit-buttons
-{
-    width: 20%;
-    /* background-color: #292524; */
-    /* cursor: pointer; */
+.project-edit-buttons > button {
+  all: unset;
+  cursor: pointer;
+  transition: transform 0.3s ease-in;
 }
-.project-edit-buttons > button
-{
-    all: unset;
-    cursor: pointer;
-    transition: transform .3s ease-in;
-}
-.project-edit-buttons > button:nth-child(1) svg:hover path
-{
-    fill:#0369a1;
+.project-edit-buttons > button:nth-child(1) svg:hover path {
+  fill: #0369a1;
 }
 
-.project-edit-buttons > button:nth-child(2) svg:hover
-{
-    transform: scale(1.1);
+.project-edit-buttons > button:nth-child(2) svg:hover {
+  transform: scale(1.1);
 }
- 
-.project-header
-{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+
+.project-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 .project-header h2,
 .modal-title h3,
-#task-modal-trigger
-{
-    font-family: var(--other-headings-font);
+#task-modal-trigger {
+  font-family: var(--other-headings-font);
 }
-.projects-trigger
-{
-    cursor: pointer;
-    transition: all .2s ease-in;
+.projects-trigger {
+  cursor: pointer;
+  transition: all 0.2s ease-in;
 }
-.projects-trigger:hover
-{
-    transform: scale(1.3);
+.projects-trigger:hover {
+  transform: scale(1.3);
 }
 .modal,
 .edit-modal,
 .task-modal,
-.edit-task-modal
-{
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(115, 145, 164, 0.6);
-    opacity: 0;
-    visibility: hidden;
-    transform: scale(1.1);
-    transition:all .2s;
+.edit-task-modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(115, 145, 164, 0.6);
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(1.1);
+  transition: all 0.2s;
 }
-.modal-content
-{
-    width: 350px;
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    margin: 30px auto;
-    border: 2px solid rgb(102,126,133);
-    border-radius: 5px;
+.modal-content {
+  width: 350px;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 30px auto;
+  border: 2px solid rgb(102, 126, 133);
+  border-radius: 5px;
 }
-.modal-title
-{
+.modal-title {
   width: 100%;
   background-color: #0891b2;
   border-radius: 5px 5px 0px 0px;
-  
+
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  
+
   font-size: 1.3rem;
 }
-
 
 .close-btn,
 .close-modal-btn,
 .close-edit-btn,
-.close-edit
-{
-    cursor: pointer;
-    font-size: 2rem;
-    font-weight: bolder;
-    color: rgb(51, 49, 46);
-    
-    transition: all .3s ease-in;
+.close-edit {
+  cursor: pointer;
+  font-size: 2rem;
+  font-weight: bolder;
+  color: rgb(51, 49, 46);
+
+  transition: all 0.3s ease-in;
 }
 .close-btn:hover,
 .close-modal-btn:hover,
 .close-edit-btn:hover,
-.close-edit:hover 
-{
+.close-edit:hover {
   transform: scale(1.3);
 }
 
-form
-{
-  background: rgb(252,255,255);
+form {
+  background: rgb(252, 255, 255);
   padding: 10px;
   border-radius: 0px 0px 5px 5px;
-  
+
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  
+
   font-size: 1.1rem;
 }
 
-input
-{
-  border: 1px solid rgb(102,126,133);
+input {
+  border: 1px solid rgb(102, 126, 133);
   padding: 5px 10px;
   border-radius: 5px;
 }
-.formInput
-{
+.formInput {
   width: 100%;
   height: 100%;
-/*   border: 1px solid green; */
-  
+  /*   border: 1px solid green; */
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 5px;
 
   margin-bottom: 10px;
-  
-/*   padding: 10px; */
+
+  /*   padding: 10px; */
 }
-.formButt
-{
+.formButt {
   width: 100%;
   height: 100%;
   margin: 10px 0;
-/*   border: 1px solid green; */
-  
+  /*   border: 1px solid green; */
+
   display: flex;
   justify-content: flex-end;
   align-items: center;
   gap: 10px;
 }
-.formButt button
-{
+.formButt button {
   cursor: pointer;
-/*   border: 1px solid red; */
+  /*   border: 1px solid red; */
   padding: 5px 12px;
   border-radius: 5px;
   text-align: center;
-  transition: all .2s ease-in;
+  transition: all 0.2s ease-in;
 }
-.formButt button:nth-child(1)
-{
-  border: 2px solid rgba(109,106,117, .5);
-  color: rgba(109,106,117, 1);
+.formButt button:nth-child(1) {
+  border: 2px solid rgba(109, 106, 117, 0.5);
+  color: rgba(109, 106, 117, 1);
   background-color: transparent;
 }
-.formButt button:nth-child(1):hover
-{
-  border-color: rgba(109,106,117, 1)
+.formButt button:nth-child(1):hover {
+  border-color: rgba(109, 106, 117, 1);
 }
-.formButt button:nth-child(2)
-{
+.formButt button:nth-child(2) {
   border: 1px solid transparent;
-  background-color: rgba(7,135,193, .7);
-  color: rgba(248,247,238, 1);
+  background-color: rgba(7, 135, 193, 0.7);
+  color: rgba(248, 247, 238, 1);
 }
-.formButt button:nth-child(2):hover
-{
-  background-color: rgba(7,135,193, 1);
+.formButt button:nth-child(2):hover {
+  background-color: rgba(7, 135, 193, 1);
 }
-.show-modal 
-{
-    opacity: 1;
-    visibility: visible;
-    transform: scale(1.0);
-    transition: all .2s;
+.show-modal {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+  transition: all 0.2s;
 }
 
-#err-msg
-{
-    color: brown;
-    font-family: var(--other-headings-font);
+#err-msg {
+  color: brown;
+  font-family: var(--other-headings-font);
 }
 
-section
-{
-    background-color: #f7f8fa;
-    flex: 3;
-    /* border: 1px solid rgb(70, 69, 69); */
+section {
+  background-color: #f7f8fa;
+  flex: 3;
+  /* border: 1px solid rgb(70, 69, 69); */
 }
 
-#task-modal-trigger
-{
-    cursor: pointer;
-    background-color: transparent;
-    min-width: 100%;
-    padding: 5px;
-    outline: none;
-    border: none;
-    font-size: 1.3rem;
-    transition: all .3s ease-in;
+#task-modal-trigger {
+  cursor: pointer;
+  background-color: transparent;
+  min-width: 100%;
+  padding: 5px;
+  outline: none;
+  border: none;
+  font-size: 1.3rem;
+  transition: all 0.3s ease-in;
 }
-#task-modal-trigger:hover
-{
+#task-modal-trigger:hover {
   background-color: #cbd5e1;
 }
-.listTasks
-{
-    background-color: cornsilk;
+.listTasks {
+  background-color: cornsilk;
 }
-.tasks-display-area
-{
-    width: 100%;
-    height: auto;
-    padding: 20px;
+.tasks-display-area {
+  width: 100%;
+  height: auto;
+  padding: 20px;
 
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 
-    font-size: 1.2rem;
-    font-family: var(--text-font);
+  font-size: 1.2rem;
+  font-family: var(--text-font);
 }
-article > div
-{
-    margin-bottom: 20px;
+article > div {
+  margin-bottom: 20px;
 }
-summary
-{
-    cursor: pointer;
-    list-style: none;
-    padding: 10px;
-    border-bottom: 2px solid #0369a1;
+summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 10px;
+  border-bottom: 2px solid #0369a1;
 }
-summary > div
-{
-    width: 100%;
-    height: 100%;
-    display: inline-flex;
-    justify-content: space-around;
-    align-items: center;
-    flex-wrap: wrap;
+summary > div {
+  width: 100%;
+  height: 100%;
+  display: inline-flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
 }
-.title
-{
-    flex: 2;
+.title {
+  flex: 2;
 }
-.title span
-{
-    padding: 4px 6px;
-    border-radius: 16px;
-    margin-left: 10px;
+.title span {
+  padding: 4px 6px;
+  border-radius: 16px;
+  margin-left: 10px;
 }
-.butts
-{
-    flex: 1;
-    
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: flex-end;
-    gap: 5px;
+.butts {
+  flex: 1;
+
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-end;
+  gap: 5px;
 }
 
 summary > div::before {
-    content: '+';
-    cursor: pointer;
-    font-size: 1.2rem;
-    font-weight: bolder;
-    margin-right: 10px;
-    display: inline-block;
-    transition: 0.2s;
+  content: "+";
+  cursor: pointer;
+  font-size: 1.2rem;
+  font-weight: bolder;
+  margin-right: 10px;
+  display: inline-block;
+  transition: 0.2s;
 }
 
 details[open] summary > div::before {
-    transform: rotate(45deg);
+  transform: rotate(45deg);
 }
-.butts button
-{
-    all: unset;
-    cursor: pointer;
-    padding: 2px;
-    border-radius: 5px;
-    transition: all .2s ease-in;
+.butts button {
+  all: unset;
+  cursor: pointer;
+  padding: 2px;
+  border-radius: 5px;
+  transition: all 0.2s ease-in;
 }
-.butts button:hover
-{
-    background-color: #d1d5db;
+.butts button:hover {
+  background-color: #d1d5db;
 }
 
-footer
-{
-    background-color: #0891b2;
-    min-height: 4vh;
-    color: #ecfeff;
+footer {
+  background-color: #0891b2;
+  min-height: 4vh;
+  color: #ecfeff;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.git-logo svg:hover path
-{
-    fill: #27272a;
+.git-logo svg:hover path {
+  fill: #27272a;
 }

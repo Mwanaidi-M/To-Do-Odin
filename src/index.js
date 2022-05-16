@@ -1,24 +1,15 @@
-import {displayAside} from './modules/asideDisplay';
-import { displayProject } from './modules/todosDisplay';
+import { displayAside } from './modules/asideDisplay'
+import { displayProject } from './modules/todosDisplay'
 
 // require('./modules/newProject');
 // require('./modules/newTask');
 // require('./modules/taskDOM');
 // require('./modules/showAll');
 
-function projectDefault()
-{
-    let inbox = new projectNew('inbox');
+displayProject.listProject()
+displayProject.listTasks()
 
-    todoFull.push(inbox);
-
-    localStorage.setItem('todos',JSON.stringify(todoFull));
-}
-
-displayProject.listProject();
-displayProject.listTasks();
-
-displayAside.render();
+displayAside.render()
 
 // createProject.editProjectName(1,'haa');
 // createTask.editTask(1,'gym', '2022-05-06','high','go work out', 'home');
